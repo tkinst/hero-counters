@@ -1,0 +1,86 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - microblog</title>
+  	{% else %}
+  	<title>Welcome to Champ Selector</title>
+  	{% endif %}
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <header class="navbar navbar-static-top navbar-inverse">
+      <div class="container">
+      <div class="navbar-header">
+        <a href="#" class="navbar-brand">Champion Counters</a>
+      </div>
+      </div>
+    </header>
+    <div class="container">
+    <div class="col-md-10 col-md-offset-1">
+      <h2>Which champion should I pick?</h2>
+      <p><b>Enter the names of enemy champions, then click submit to see common counters.</b></p>
+      <form name="selector">
+
+      <select id="ally1" name="ally1">
+      {% for hero in heroes %}
+      <option value="{{hero}}">{{hero}}</option>
+      {% endfor %}
+      </select>
+
+      <select id="ally2" name="ally2">
+      {% for hero in heroes %}
+      <option value="{{hero}}">{{hero}}</option>
+      {% endfor %}
+      </select>
+
+      <select id="ally3" name="ally3">
+      {% for hero in heroes %}
+      <option value="{{hero}}">{{hero}}</option>
+      {% endfor %}
+      </select>
+
+      <select id="ally4" name="ally4">
+      {% for hero in heroes %}
+      <option value="{{hero}}">{{hero}}</option>
+      {% endfor %}
+      </select>
+
+      <select id="ally5" name="ally5">
+      {% for hero in heroes %}
+      <option value="{{hero}}">{{hero}}</option>
+      {% endfor %}
+      </select>
+
+      <input id="submit" type="button" value="Submit" class="btn btn-primary">
+      </form>
+      
+      <div id="outContent"></div>
+
+    </div>
+    </div>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script type="text/javascript">
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      </script>
+      <script type="text/javascript">
+        $("#submit").click(function(){
+          $.post($SCRIPT_ROOT + "/_find",
+            {
+                ally1: $('#ally1').val(),
+                ally2: $('#ally2').val(),
+                ally3: $('#ally3').val(),
+                ally4: $('#ally4').val(),
+                ally5: $('#ally5').val()
+            },
+            function(data, textStatus)
+            {
+              //alert(data);
+              $("#outContent").html(data);
+            });
+        });
+      </script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+<table class="table table-condensed table-striped">
+<tr><th>Name</th><th>Num Counters</th><th>Which champions?</th></tr>
+{%for counter in counters%}
+  <tr><td>{{counter.num}}</td><td>{{counter.name}}</td><td>{{counter.whichchamps}}</td></tr>
+{% endfor %}
+</table>
