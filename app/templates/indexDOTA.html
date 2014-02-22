@@ -13,17 +13,14 @@
     <header class="navbar navbar-static-top navbar-inverse">
       <div class="container">
       <div class="navbar-header">
-        <a href="#" class="navbar-brand">LoL Champion Counters</a>
-		<a href="#" class="navbar-brand">&nbsp;&nbsp;&nbsp;</a>
-		<a href="/dota" class="navbar-brand"><span style="color:DD0000;">NEW! DOTA2</span></a>
+        <a href="#" class="navbar-brand"><span style="color:#DD0000;">DOTA</span> Hero Counters</a>
       </div>
-		
       </div>
     </header>
     <div class="container">
     <div class="col-md-10 col-md-offset-1">
-      <h2>Which champion should I pick?</h2>
-      <p><b>Enter the names of enemy champions, then click submit to see common counters.</b></p>
+      <h2>Which hero should I pick?</h2>
+      <p><b>Enter the names of enemy heroes, then click submit to see common counters.</b></p>
       <form name="selector">
 
       <select id="ally1" name="ally1">
@@ -69,7 +66,7 @@
       </script>
       <script type="text/javascript">
         $("#submit").click(function(){
-          $.post($SCRIPT_ROOT + "/_find",
+          $.post($SCRIPT_ROOT + "/_findDOTA",
             {
                 ally1: $('#ally1').val(),
                 ally2: $('#ally2').val(),

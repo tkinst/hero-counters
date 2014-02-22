@@ -5,7 +5,7 @@ conn = sqlite3.connect('champsnew.db')
 conn.text_factory = str
 c = conn.cursor()
 
-f = open("ChampionSelect-AllItems.csv","rb")
+f = open("DotaHut-AllItems.csv","rb")
 allcsv = csv.DictReader(f)
 
 for eachLine in allcsv:
