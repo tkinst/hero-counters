@@ -5,12 +5,14 @@ import sqlite3
 import sys
 
 def init_db():
+    ''' Initializes the database connection for the LoL function '''
     conn = sqlite3.connect('champs.db')
     conn.text_factory = str
     c = conn.cursor()
     return c
 
 def init_dota_db():
+    ''' Initializes the database connection for the DOTA2 function '''
 	conn = sqlite3.connect('dota.db')
 	conn.text_factory = str
 	c = conn.cursor()
@@ -19,42 +21,46 @@ def init_dota_db():
 @app.route('/')
 @app.route('/index')
 def index():
-    db = init_db()
+    db = init_db() # initialize the database
 
-    cur = db.execute("SELECT DISTINCT name from HeroCounters")
+    cur = db.execute("SELECT DISTINCT name from HeroCounters") # get the list of champions
     heroes = cur.fetchall()
-    heroes_list = []
+    heroes_list = [] # initialize the list so we can pass the list to the view
     heroes_list.append("---")
     for eachHero in heroes:
-        heroes_list.append(str(eachHero[0]))
-    return render_template("index.html",heroes=heroes_list)
+        heroes_list.append(str(eachHero[0])) # generate the list
+    return render_template("index.html",heroes=heroes_list)  # push the list to the view
 
 
 @app.route('/dota')
 def dota():
-	db = init_dota_db()
+	db = init_dota_db() # initialize the database
 	
-	cur = db.execute("SELECT DISTINCT name from HeroCounters")
+	cur = db.execute("SELECT DISTINCT name from HeroCounters") # get the list of heroes
 	heroes = cur.fetchall()
-	heroes_list = []
+	heroes_list = [] # initialize the list so we can pass the list to the view
 	heroes_list.append("---")
 	for eachHero in heroes:
-		heroes_list.append(str(eachHero[0]))
-	return render_template("indexDOTA.html",heroes=heroes_list)
+		heroes_list.append(str(eachHero[0])) # generate the list
+	return render_template("indexDOTA.html",heroes=heroes_list) # push the list to the view
 
 @app.route('/_find', methods=["POST"])
 def find_champs():
+    ''' Takes the input values from the main page, and finds common counters '''
+
     a = request.form['ally1']
     b = request.form['ally2']
     c = request.form['ally3']
     d = request.form['ally4']
     e = request.form['ally5']
 
+    # initialize all our variables
     champList = [a,b,c,d,e]
     master_dict = {}
     outList = []
     namedict = {}
 
+    # database connection
     db = init_db()
 
     for eachChamp in champList:
