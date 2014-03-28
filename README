@@ -1,0 +1,10 @@
+This is a Flask webapp for finding champion counters in League of Legends. It takes input from the user, processes it using data from championselect.net, and outputs a table of counters.
+
+This project uses:
+- Python
+- JQuery
+- AJAX
+- Bootstrap 3
+- Flask
+- SQLite
+- Requests
